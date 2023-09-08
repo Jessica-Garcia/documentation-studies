@@ -49,9 +49,9 @@
     ],
 
     "sortedFruitListObject": [
-        {"A": ["abacaxi", "abacate", "amora"]},
-        {"B": ["banana", "bacuri", "buriti"]},
-        {"C": ["caju", "carambola", "cacau"]},
-        {"D": ["damasco", "durião"]}
+        {"letter": "A", "fruits": ["abacaxi", "abacate", "amora"]},
+        {"letter": "B", "fruits": ["banana", "bacuri", "buriti"]},
+        {"letter": "C", "fruits": ["caju", "carambola", "cacau"]},
+        {"letter": "D", "fruits": ["damasco", "durião"]}
     ]
 }

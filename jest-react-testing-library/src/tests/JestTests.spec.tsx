@@ -2,6 +2,11 @@ import { api } from '../lib/axios'
 
 type CallbackTest = (data: string[]) => void
 
+interface SortedFruits {
+  letter: string
+  fruits: string[]
+}
+
 const fetchSelectedFruit = async (callbackTestFunction: CallbackTest) => {
   try {
     const { data } = await api.get('fruitList')
@@ -27,6 +32,21 @@ const throwErrorTestFetchString = async () => {
   } catch (error) {
     throw new Error('error').message
   }
+}
+
+const returnSortedFruitListObject = async () => {
+  try {
+    const { data } = await api.get<SortedFruits[]>('sortedFruitListObject')
+    return data
+  } catch (error) {
+    throw new Error('error').message
+  }
+}
+
+const isFruitInListObject = (data: SortedFruits[], fruit: string) => {
+  const fruitLists = data.map((obj) => obj.fruits)
+  const hasFruit = fruitLists.map((l, i) => l[i]).includes(fruit.toLowerCase())
+  return hasFruit
 }
 
 describe('Most common matchers', () => {
@@ -187,5 +207,12 @@ describe('async tests callback', () => {
     }
 
     fetchSelectedFruit(callback)
+  })
+})
+
+describe('test only', () => {
+  it.only('has abacaxi', async () => {
+    const data = await returnSortedFruitListObject()
+    expect(isFruitInListObject(data, 'ABACAXI')).toBeTruthy()
   })
 })
